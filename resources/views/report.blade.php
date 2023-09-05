@@ -9,8 +9,9 @@
 <body>
     <h1>report list</h1>
     <ul>
-        <li>report 1</li>
-        <li>report 2</li>
+        @foreach ($reports as $report)
+            <li>{{$report}}</li>
+        @endforeach
     </ul>
 
     <form action="/report" method="post">

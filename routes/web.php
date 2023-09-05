@@ -30,7 +30,7 @@ Route::get('/set', function () {
 Route::get('/login', fn () => view('login'));
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/report', fn() => view('report'));
+Route::get('/report', [ReportController::class, 'index']);
 Route::post('/report', [ReportController::class, 'addReport']);
 
 Route::get('/notes', [NoteController::class, 'getAll']);
