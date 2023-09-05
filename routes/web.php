@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\NoteController;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +27,23 @@ Route::get('/set', function () {
     return $data;
 });
 
-Route::get('/notes',[NoteController::class, 'getAll']);
+Route::get('/login', fn () => view('login'));
+Route::post('/login', function (Request $request) {
+    // ddd($request);
+    $sanitized = $request->validate([
+        "email" => ["email", "required"],
+        "password" => ["required"],
+    ]);
+    // ddd($sanitized);
+    if (Auth::attempt([
+        "email" => $sanitized["email"],
+        "password" => $sanitized["password"]
+    ])) {
+        // ddd(Auth::user());
+        return "success";
+    }
+    return "you fucked up";
+});
+Route::get('/notes', [NoteController::class, 'getAll']);
 Route::post('/notes', [NoteController::class, 'store']);
 Route::get('/notes/{id}', [NoteController::class, 'getById']);
