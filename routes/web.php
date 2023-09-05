@@ -2,9 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NoteController;
-use Illuminate\Auth\Events\Registered;
+use App\Http\Controllers\ReportController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +29,10 @@ Route::get('/set', function () {
 
 Route::get('/login', fn () => view('login'));
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::get('/report', fn() => view('report'));
+Route::post('/report', [ReportController::class, 'addReport']);
+
 Route::get('/notes', [NoteController::class, 'getAll']);
 Route::post('/notes', [NoteController::class, 'store']);
 Route::get('/notes/{id}', [NoteController::class, 'getById']);
