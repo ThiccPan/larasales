@@ -7,6 +7,11 @@
     <title>Report</title>
 </head>
 <body>
+    Hello {{Auth::user()->name}}
+    <form action="/logout" method="post">
+        @csrf
+        <button type="submit">logout</button>
+    </form>
     <h1>report list</h1>
     <ul>
         @foreach ($reports as $report)
