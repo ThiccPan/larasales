@@ -10,7 +10,7 @@
     <h1>report list</h1>
     <ul>
         @foreach ($reports as $report)
-            <li>{{$report}}</li>
+            <li>{{$report->content}}</li>
         @endforeach
     </ul>
 
