@@ -13,7 +13,18 @@ class ReportController extends Controller
         return view('report', ["reports" => $reports]);
     }
 
-    public function addReport(Request $request)
+    public function getByID($id)
+    {
+        // dd(session()->get('_previous')['url']);
+        // TODO: add pagination
+        $data = Report::where('id', $id)
+            ->first();
+        return view('report-detail', [
+            "report" => $data,
+        ]);
+    }
+
+    public function add(Request $request)
     {
         // TODO: sanitize input
 
@@ -29,5 +40,11 @@ class ReportController extends Controller
             $msg = "you fucked up";
         }
         return back()->withInput(["message" => $msg]);
+    }
+
+    public function delete($id)
+    {
+        Report::destroy($id);
+        return redirect('/');
     }
 }

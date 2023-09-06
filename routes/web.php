@@ -31,7 +31,9 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::get('/', [ReportController::class, 'index'])->middleware('auth');
-Route::post('/report', [ReportController::class, 'addReport']);
+Route::post('/report', [ReportController::class, 'add']);
+Route::get('/report/{id}', [ReportController::class, 'getByID']);
+Route::delete('/report/{id}', [ReportController::class, 'delete']);
 
 Route::get('/notes', [NoteController::class, 'getAll']);
 Route::post('/notes', [NoteController::class, 'store']);
