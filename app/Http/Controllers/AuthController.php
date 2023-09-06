@@ -15,13 +15,20 @@ class AuthController extends Controller
             "password" => ["required"],
         ]);
         // ddd($sanitized);
-        if (Auth::attempt([
+        if (!Auth::attempt([
             "email" => $sanitized["email"],
             "password" => $sanitized["password"]
         ])) {
-            // ddd(Auth::user());
-            return "success";
+            return back();
         }
-        return "you fucked up";
+        return redirect('/');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
     }
 }
