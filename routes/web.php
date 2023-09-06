@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', fn () => view('welcome'));
 
 Route::get('/set', function () {
     $data = cache()->remember('data', 5, function () {
@@ -27,10 +26,11 @@ Route::get('/set', function () {
     return $data;
 });
 
-Route::get('/login', fn () => view('login'));
+Route::get('/login', fn () => view('login'))->name('login');
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::get('/report', [ReportController::class, 'index']);
+Route::get('/', [ReportController::class, 'index'])->middleware('auth');
 Route::post('/report', [ReportController::class, 'addReport']);
 
 Route::get('/notes', [NoteController::class, 'getAll']);
