@@ -16,7 +16,7 @@ class Report extends Model
      */
     protected $fillable = [
         'title',
-        'author',
+        'author_id',
         'content',
     ];
 }
