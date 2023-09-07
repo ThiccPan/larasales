@@ -32,7 +32,7 @@
         <br>
         <textarea name="content" id="" cols="50" rows="10">{{ $report->content }}</textarea>
         <br>
-        <button type="submit">edit</button>
+        <button type="submit">update</button>
     </form>
 </body>
 
