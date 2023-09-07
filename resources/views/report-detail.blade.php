@@ -18,7 +18,22 @@
             <a href="">edit</a>
         </li>
     </ul>
-    <p>{{ $report->content }}</p>
+    <form action="/report/{{ $report->id }}" method="post">
+        @method('PUT')
+        @csrf
+        <label for="title">title</label>
+        <input type="text" name="title" id="title" value="{{$report->title}}">
+        <br>
+        <p>{{$report->author_id}}</p>
+        {{$report->created_at}}
+        {{$report->updated_at}}
+        <br>
+        <label for="content">content</label>
+        <br>
+        <textarea name="content" id="" cols="50" rows="10">{{ $report->content }}</textarea>
+        <br>
+        <button type="submit">edit</button>
+    </form>
 </body>
 
 </html>
