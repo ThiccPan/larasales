@@ -15,7 +15,6 @@ class ReportController extends Controller
 
     public function getByID($id)
     {
-        // dd(session()->get('_previous')['url']);
         // TODO: add pagination
         $data = Report::where('id', $id)
             ->first();
@@ -42,9 +41,14 @@ class ReportController extends Controller
         return back()->withInput(["message" => $msg]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        ddd($request);
+        // ddd($request);
+        $oldReport = Report::find($id);
+        $oldReport->title = $request->title;
+        $oldReport->content = $request->content;
+        $oldReport->save();
+        return back();
     }
 
     public function delete($id)
