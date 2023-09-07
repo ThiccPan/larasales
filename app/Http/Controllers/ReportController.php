@@ -42,6 +42,11 @@ class ReportController extends Controller
         return back()->withInput(["message" => $msg]);
     }
 
+    public function update(Request $request)
+    {
+        ddd($request);
+    }
+
     public function delete($id)
     {
         Report::destroy($id);
