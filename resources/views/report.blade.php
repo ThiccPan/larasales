@@ -14,28 +14,23 @@
         @csrf
         <button type="submit">logout</button>
     </form>
-    <form action="/report" method="post">
-        @csrf
-
-        <textarea name="report" id="report" cols="30" rows="10"></textarea>
-        <button type="submit">submit report</button>
-    </form>
-    <h1>report list</h1>
-    @foreach ($reports as $report)
-        <h3>{{ $report->title }}</h3>
-        Author id: {{ $report->author_id }}
-        <div>
-            <a href="/report/{{ $report->id }}">report detail</a>
-        </div>
-        <div>
-            <form action="/report/{{ $report->id }}" method="post">
-                @csrf
-                @method('DELETE')
-                <button type="submit">delete</button>
-            </form>
-        </div>
-        <hr>
-    @endforeach
+    <x-report.form/>
+        <h1>report list</h1>
+        @foreach ($reports as $report)
+            <h3>{{ $report->title }}</h3>
+            Author id: {{ $report->author_id }}
+            <div>
+                <a href="/report/{{ $report->id }}">report detail</a>
+            </div>
+            <div>
+                <form action="/report/{{ $report->id }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">delete</button>
+                </form>
+            </div>
+            <hr>
+        @endforeach
 </body>
 
 </html>
