@@ -25,12 +25,16 @@ class ReportController extends Controller
 
     public function add(Request $request)
     {
-        // TODO: sanitize input
+        $cleanRequest = $request->validate([
+            "title" => ['string'],
+            "report" => ['string', 'required'],
+        ]);
+        $cleanRequest["author_id"] = $request->user()->id;
 
         $reportDTO = new Report([
-            "title" => "report by " . $request->user()->name,
-            "author_id" => $request->user()->id,
-            "content" => $request->input("report")
+            "title" => "report by " . $cleanRequest["title"],
+            "author_id" => $cleanRequest["author_id"],
+            "content" => $cleanRequest["report"],
         ]);
 
         $ok = $reportDTO->save();
