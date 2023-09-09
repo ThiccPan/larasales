@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ReportCreated;
 use App\Models\Report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ReportController extends Controller
 {
@@ -42,6 +44,9 @@ class ReportController extends Controller
         if (!$ok) {
             $msg = "you fucked up";
         }
+
+        // TODO: implement queue
+        Mail::to('ihilmiderian@gmail.com')->send(new ReportCreated);
         return back()->withInput(["message" => $msg]);
     }
 
