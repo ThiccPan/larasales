@@ -22,17 +22,19 @@
         @method('PUT')
         @csrf
         <label for="title">title</label>
-        <input type="text" name="title" id="title" value="{{$report->title}}">
+        <input type="text" name="title" id="title" value="{{ $report->title }}">
         <br>
-        <p>{{$report->author_id}}</p>
-        {{$report->created_at}}
-        {{$report->updated_at}}
+        <p>{{ $report->author_id }}</p>
+        {{ $report->created_at }}
+        {{ $report->updated_at }}
         <br>
         <label for="content">content</label>
         <br>
         <textarea name="content" id="" cols="50" rows="10">{{ $report->content }}</textarea>
         <br>
-        <button type="submit">update</button>
+        @if (Auth::user()->id == $report->author_id)
+            <button type="submit">update</button>
+        @endif
     </form>
 </body>
 
